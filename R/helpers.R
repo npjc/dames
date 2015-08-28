@@ -29,7 +29,7 @@ left_pad <- function(inc) {
 }
 
 # assembles new dame based on provided args
-newdame <- function(slug = "my-next-file", aoa = "AOA", path = ".", ptrn = "_") {
+newdame <- function(slug = "my-next-file", aoa = "AOA", path = ".", ptrn = NULL) {
   files_and_dirs <- list.files(path, ptrn)
   if(length(files_and_dirs) == 0) {
     writeLines(c("---", "  output: ", "  html_document:", "  keep_md: TRUE",
