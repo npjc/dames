@@ -1,5 +1,5 @@
 # main workhorse
-nd <- function(slug = "my_next_file", aoa = "AOA", path = ".", ptrn = NULL, template_path = "../REF_00_template.Rmd") {
+nd <- function(slug = "my_next_file", aoa = "AOA", path = ".", ptrn = "[_]", template_path = "../REF_00_template.Rmd") {
   dame <- newdame(slug, aoa, path, ptrn)
   new_dir <- paste0(path, '/', dame)
   dir.create(new_dir)
