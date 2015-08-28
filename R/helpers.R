@@ -32,11 +32,20 @@ left_pad <- function(inc) {
 newdame <- function(slug = "my-next-file", aoa = "AOA", path = ".", ptrn = "[_]") {
   files_and_dirs <- list.files(path, ptrn)
   if(length(files_and_dirs) == 0) {
-    writeLines(c("---", "  output: ", "  html_document:", "  keep_md: TRUE",
-                 "variant: markdown_github", "---", "", "```{r common-setup, echo=FALSE}",
+    writeLines(c("---",
+                 "output: ",
+                 "  html_document:",
+                 "    keep_md: TRUE",
+                 "    variant: markdown_github",
+                 "---",
+                 "",
+                 "```{r common-setup, echo=FALSE}",
                  "knitr::opts_chunk$set(", "  collapse = TRUE,", "  comment = \"#>\"",
-                 ")", "pacman::p_load(readr,readrbio, dplyr, tidyr, stringi, ggplot2)",
-                 "```", ""),"REF_00_template.Rmd")
+                 ")",
+                 "pacman::p_load(readr,readrbio, dplyr, tidyr, stringi, ggplot2)",
+                 "```",
+                 ""),
+               "REF_00_template.Rmd")
     files_and_dirs <- list.files(path, ptrn)
   }
   dames_df <- read_dames(files_and_dirs)
