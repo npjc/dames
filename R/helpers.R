@@ -1,7 +1,12 @@
-# take files names that are arranged in data_categories and turn them into a
-# tidy data frame.
-# defaults to 4 variables: abbreviation or acronym / increment / slug / extension
-# dames stands for datafied names
+#' read_dames
+#'
+#' take files names that are arranged in data_categories and turn them into a
+#' tidy data frame. Defaults to 4 variables: abbreviation or acronym /
+#' increment / slug / extension.
+#' @param dames stands for datafied names
+#' @param var_sep
+#' @param name_vars
+#' @keywords internal
 read_dames <- function(dames, var_sep = "_", name_vars = c("aoa", "inc","slug","ext")) {
   pattern <- paste0("[", var_sep, "//.]")
   split_ls <- data.table::tstrsplit(dames, pattern, type.convert = T)
@@ -9,7 +14,14 @@ read_dames <- function(dames, var_sep = "_", name_vars = c("aoa", "inc","slug","
   dplyr::as_data_frame(named_ls)
 }
 
-# now need function to get next increment for folder or file
+#' Infer the next increment number
+#'
+#' takes a df of tidy'd dames and determines the next increment to use.
+#'
+#' @param dames_df output from \code{read_dames}
+#' @param what what to consider: files and/or folders.
+#' @param inc_by the amount to increment by
+#' @keywords internal
 infer_next_inc <- function(dames_df, what = c("folders", "files"), inc_by = 1) {
   what <- match.arg(what)
   expr <- switch(what,
@@ -21,14 +33,20 @@ infer_next_inc <- function(dames_df, what = c("folders", "files"), inc_by = 1) {
   # summarise_(.dots = list(max = ~max(incr)))
   max(inc_df$inc) + inc_by
 }
-# function to left pad inc if need be and convert to char
+
+#' left pad inc if need be and convert to char
+#'
+#' @param inc increment
+#' @keywords internal
 left_pad <- function(inc) {
   left_pad <- NULL
   if(nchar(inc) == 1) left_pad <- 0
   paste0(left_pad, inc, collapse="")
 }
 
-# assembles new dame based on provided args
+#' assemble new dame based on provided arguments
+#' @inheritParams dames_df
+#' @keywords internal
 newdame <- function(slug = "my-next-file", aoa = "AOA", path = ".", ptrn = "[_]") {
   files_and_dirs <- list.files(path, ptrn)
   if(length(files_and_dirs) == 0) {
