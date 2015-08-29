@@ -1,20 +1,31 @@
 
+
+
+
 ### What dames ?
 
 dames stands for **d**ata n**ames**. 
 
 Data names are file names with consistent formatting: 
-- Variables are consitently ordered
-- Variables are predictably delimited by a consistent separator. 
-- Variables are things like:
-  - date (`1991-07-03`)
-  - abbreviation-or-accronym (`AOA`)
-  - slug-formatted-descriptor (`slug-name-of-file-that-describes-its-contents`)
-  - file extension (`ext`).
+
+* Variables are consitently ordered
+* Variables are predictably delimited by a consistent separator. 
+* Variables are things like:
+    * date (`1991-07-03`)
+    * abbreviation-or-accronym (`AOA`)
+    * slug-formatted-descriptor (`slug-name-of-file-that-describes-its-contents`)
+    * file extension (`ext`).
 
 For example:
-```
-AOA_01_slug-name-of-file-that-describes-its-contents.ext
+
+```r
+eg <- "AOA_01_slug-name-of-file-that-describes-its-contents.ext"
+dames:::read_dames(eg)
+#> Source: local data frame [1 x 4]
+#> 
+#>     aoa   inc                                          slug   ext
+#>   (chr) (int)                                         (chr) (chr)
+#> 1   AOA     1 slug-name-of-file-that-describes-its-contents   ext
 ```
 
 ### Why dames ?
@@ -57,5 +68,6 @@ file.rename(list.files(pattern = "\\.md$"), "README.md")
 2. keeps all the bits relevant to a section in the same handy folder so everything is easy to find later on (making the location of the contents usefully informative).
 
 ### notes
+- using [`reprex:::construct_safeslug()`](https::github.com/jennybc/reprex) cause it is nice and convenient; namespace it.
 - many good people have put out great education on naming/organization of stuffs. Make a list.
 - every time you use an aoa for the first time it should be added to a lexicon.csv file that lives in the project directory.
