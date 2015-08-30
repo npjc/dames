@@ -57,15 +57,26 @@ Where the output of each op is an damed `.Rmd` file that contains a child link t
 
 #### but why a folder for each ?
 
-This has two purposes:
+This has a few purposes:
 
-1. with github hosting if you rename the knitted `.md` to `README.md` it will automatically preview in each directory. one way to do this:
+* with github hosting if you rename the knitted `.md` to `README.md` it will automatically preview in each directory. To do this is to use `knitme()`
+if working in a dame directory, or `knit_rmds_to_rdme()` to do all the .Rmds in
+a project home directory.
 
 ```r
-file.rename(list.files(pattern = "\\.md$"), "README.md")
+knitme() # one .rmd dame
+knit_rmds_to_rdme() # all the .rmds
+append_links() # for github browsing deliciousness.
 ```
 
-2. keeps all the bits relevant to a section in the same handy folder so everything is easy to find later on (making the location of the contents usefully informative).
+There is also `append_links()` which will append all the links to these readmes
+into `00_REF_template.Rmd` which, when knitted, will generate the master readme
+for that project with all the links!
+
+* keeps all the bits relevant to a section in the same handy folder so everything is easy to find later on (making the location of the contents usefully informative).
+
+ 
+
 
 ### notes
 - using [`reprex:::construct_safeslug()`](https::github.com/jennybc/reprex) cause it is nice and convenient; namespace it.
