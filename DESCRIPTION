@@ -1,10 +1,9 @@
 Package: dames
 Type: Package
-Title: What the Package Does (Title Case)
-Version: 0.1
+Title: Dames are better than names because they contain compute friendly data.
+Version: 0.1.0
 Date: 2015-08-28
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
-Description: More about what it does (maybe more than one line)
-License: What license is it under?
+Author: Nicolas Coutin
+Description: easily generate damed (files named with a dame) files
+License: MIT
 LazyData: TRUE
