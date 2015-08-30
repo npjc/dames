@@ -34,6 +34,8 @@ append_links <- function(common = "REF_00_template.Rmd") {
   splits <- lapply(strsplit(rdmes, "/", fixed = T), head, -1)
   splits <- lapply(splits, paste0, collapse = "/")
   tmp <- paste0("[",splits,"](", rdmes,")\n")
-  all <- union(readLines(common), tmp)
+  parent_lines <- readLines(common)
+  parent_links <- grep("\\]\\(", parent_lines, value = T) #get just the links
+  all <- union(parent_links, tmp)
   writeLines(all, common)
 }
