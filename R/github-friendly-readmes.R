@@ -33,11 +33,10 @@ append_links <- function(common = "REF_00_template.Rmd") {
   rdmes <- setdiff(rdmes,"README.md")
   splits <- lapply(strsplit(rdmes, "/", fixed = T), head, -1)
   splits <- lapply(splits, paste0, collapse = "/")
-  tmp <- paste0("[",splits,"](", rdmes,")\n")
+  tmp <- paste0("[",splits,"](", rdmes,")")
   parent_lines <- readLines(common)
   parent_links <- grepl("\\]\\(", parent_lines) #get just the link line indices
   stable_lines <- parent_lines[!parent_links]
-  stable_lines <- c(stable_lines[stable_lines != ""],"")
   links_to_unify <- parent_lines[parent_links]
   all <- c(stable_lines, tmp)
   writeLines(all, common)
